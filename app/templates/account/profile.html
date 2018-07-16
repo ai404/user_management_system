@@ -1,0 +1,86 @@
+{% extends "layout_in.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">Profile</h1>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 " id="messages">
+                        {% include "_messages.html" %}
+                    </div>
+                </div>
+                {% import '_forms.html' as forms %}
+
+                <div class="col-md-8">
+                    <form action="{{ url_for(".picture_update") }}" enctype="multipart/form-data" id="picture_update" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Avatar</label>
+                            <div class="col-md-3">
+                                <img src="{{ resized_img_src(current_user.profile.get_picture(), mode='crop', width=200, height=200) }}" alt="AVATAR" class="img-responsive img-thumbnail">
+                            </div>
+                            <div class="col-md-7">
+                                {% for field in photo_form %}
+                                    {{ forms.render_field(field) }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" class="form-horizontal">
+
+                        {% for field in form %}
+                            {{ forms.render_field(field) }}
+                        {% endfor %}
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="well">
+                        <p>
+                            <strong>How to manage your profile?</strong>
+                        </p>
+                        <ol>
+                            <li class="text-right text-justify">
+                              Upload your picture so that other colleague can identify who you are.
+   You can uplaod a JPEG, PNG or TIFF file. Max size is 1 MB. Choose file from your local computer and the the picture will be uploaded automatically.
+                            </li>
+                            <li class="text-right text-justify">
+                              You can edit your First name, Last name and Phone number. Don't forget to "Submit" your changes to save the data.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+{% block js_scripts %}
+    <script>
+        $(document).ready(function(){
+            $("#picture_update input[type=file]").change(function(){
+                $("#picture_update").submit();
+            });
+            $("#picture_update").submit(function(e){
+                e.preventDefault();
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type:'POST',
+                    url:"{{ url_for(".picture_update") }}",
+                    data:formData,
+                    processData:false,
+                    contentType:false,
+                    success:function(data){
+                        window.location.reload(true);
+                        //$("#messages").html(data);
+                    }
+
+                });
+            });
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout_in.html" %}
+{% block title %}Account{% endblock %}
+{% block content %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">Account</h1>
+                </div>
+                <div class="form-group row">
+                <div class="col-sm-12 ">
+                    {% include "_messages.html" %}
+                </div>
+                </div>
+                <div class="col-md-8">
+                    <form method="post" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-md-10">
+                                <input disabled type="email" id="email" class="form-control" value="{{ current_user.email }}" placeholder="email address">
+                            </div>
+                        </div>
+
+                        {% import "_forms.html" as forms %}
+                        {% for field in form %}
+                            {{ forms.render_field(field) }}
+                        {% endfor %}
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="well">
+                        <p>
+                            <strong>Manage login credentials</strong>
+                        </p>
+                        <ol>
+                            <li class="text-right text-justify">
+                              You can change your login password by updating new password. Retype the same password agian and press "Submit".
+                              You can use the new password when you login next time. Don't forget to update the password stored by the browser too. Else you might get an error!
+
+                            </li>
+                            <li class="text-right text-justify">
+                              You cannot change the registered Email ID at this moment.
+                              Please contact us at support[at]my-domain[dot]com to get help for changing the registered Email ID.
+                              But, why would want to do that?
+
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

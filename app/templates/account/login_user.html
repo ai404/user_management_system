@@ -1,0 +1,70 @@
+{% extends "layout_not_in.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <h3 class="page-header">
+                Login to your account
+            </h3>
+            <div class="form-group row">
+            <div class="col-sm-12 ">
+                {% include "_messages.html" %}
+            </div>
+            </div>
+            <form method="post" class="form-horizontal">
+                {% import '_forms.html' as forms %}
+
+                {% for field in form %}
+                    {{ forms.render_field(field) }}
+                {% endfor %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <div class="checkbox">
+                            <label class="login_label">
+                                <input name="remember_me" type="checkbox" class="login_checkbox"> Remember me
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="{{ url_for(".reset") }}" class="btn btn-primary btn-xs pull-right" style="margin-top:10px">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </div>
+
+                <br><br>
+                <p class="col-sm-offset-2">
+                    Don't have an account?
+                    <a href="{{ url_for(".register") }}" class="btn btn-primary btn-xs">
+                        Register
+                    </a>
+                </p>
+
+            </form>
+
+        </div>
+        <div class="col-md-5">
+            <h3 class="page-header">
+                What's new?
+            </h3>
+
+            <div>
+                <strong>Easy Start</strong>
+                <p class="text-right text-justify">
+                  We like to keep things simple! this is the easiest way to start a project with a ready to use account system
+                </p>
+            </div>
+            <div>
+                <strong>Layout templates</strong>
+                <p class="text-right text-justify">
+                  We used BluePrints to isolate each part of the website. you can put each functionality in a separate folder.
+
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout_not_in.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <h3 class="page-header">
+                Register with us
+            </h3>
+                {% include "_messages.html" %}
+            <form class="form-horizontal" method="POST" name="register_user_form">
+                {% import '_forms.html' as forms %}
+
+                {% for field in form %}
+                    {{ forms.render_field(field) }}
+                {% endfor %}
+                {# <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Full Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                    </div>
+                </div>
+                 #}
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+
+                <br><br>
+                <p class="col-sm-offset-2">
+                    Already have an account?
+                    <a href="{{ url_for(".login") }}" class="btn btn-primary btn-xs">
+                        Login
+                    </a>
+                </p>
+
+            </form>
+
+        </div>
+        <div class="col-md-5">
+            <h3 class="page-header">
+                What's new?
+            </h3>
+
+            <div>
+                <strong>Easy Start</strong>
+                <p class="text-right text-justify">
+                  We like to keep things simple! this is the easiest way to start a project with a ready to use account system
+                </p>
+            </div>
+            <div>
+                <strong>Layout templates</strong>
+                <p class="text-right text-justify">
+                  We used BluePrints to isolate each part of the website. you can put each functionality in a separate folder.
+
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
