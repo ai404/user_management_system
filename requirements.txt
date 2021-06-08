@@ -23,7 +23,7 @@ MarkupSafe==1.0
 olefile==0.44
 passlib==1.7.1
 PIL==1.1.7
-Pillow==4.2.1
+Pillow==8.2.0
 pillowcase==2.0.0
 PyMySQL==0.7.11
 python-dateutil==2.6.1
